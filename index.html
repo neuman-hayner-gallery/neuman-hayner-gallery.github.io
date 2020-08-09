@@ -6,11 +6,11 @@
     article {
       display: grid;
       grid-template-rows: auto;
-      grid-template-columns: 96px auto 96px;
+      grid-template-columns: 106px auto 106px;
     }
     section {
    
-      border: 0px solid green;
+      border: 1px solid green;
     }
     img{
       display: block;
@@ -21,7 +21,7 @@
 
     .myButton {
       margin-top: 45vh;
-     margin-left: 21px;
+     margin-left: 26px;
     background-color:#ffffff;
     border-radius:26px;
     border:1px solid #000000;
@@ -35,21 +35,23 @@
     outline:none;
     }
     
-    	.Rbutun{
+	.Rbutun{
         position:absolute;                  
-      top:0;
-      right:21px;
+      top:10px;
+      right:15px;
 	background-color: #ffffff;
 	outline: none;
 	border: none;
+	font-size:12px;
       }
-        .Lbutun{
+      .Lbutun{
         position:absolute;                  
-      top:0;
-      left:21px;
+      top:10px;
+      left:5px;
 	background-color: #ffffff;
 	outline: none;
 	border: none;
+	font-size:12px
       }
       
     .idk{
@@ -95,6 +97,8 @@ const projectSize=
 }
 // second part of code
 
+
+
   const exist={
   }
   for (var index = 0; index < projects.length; index++) { 
@@ -139,7 +143,7 @@ const projectSize=
 
 
   //starting code
-    var urlParams;
+   var urlParams;
     (window.onpopstate = function () {
       var match,
           pl     = /\+/g,  // Regex for replacing addition symbol with a space
@@ -152,22 +156,36 @@ const projectSize=
          urlParams[decode(match[1])] = decode(match[2]);
     })();
 
-    var show=urlParams["key"]
+	var show="show"
+	var prj="prj"
+	var temp="temp"
+    	show=urlParams["key"]
     if(show in exist)
     {
-      console.log("got here from "+show);
-      changetext();
+	console.log("got here from "+show);
+	temp=show;
+	prj=temp.replace(/0|1|2|3|4|5|6|7|8|9/g, "");
+	changetext();
     }
     else
     {
       console.log("showing first image");
-      show="tel-aviv-penthouse1"
+      show="tel-aviv-penthouse1";
+	prj="tel-aviv-penthouse";
       changetext();
 
     }
 
     var link=show+".jpg"
     document.getElementById('img').src=link;
+
+
+document.getElementById(">>btn").onclick = function (){
+    upjump()
+    changeImage(show)
+    changetext();
+
+  };
 
 
   document.getElementById(">btn").onclick = function (){
@@ -183,6 +201,13 @@ const projectSize=
     changetext();
 
   };
+
+	function upjump()
+	{
+		show=up[prj+projectSize[prj]]
+		temp=show;
+		prj=temp.replace(/0|1|2|3|4|5|6|7|8|9/g, "");
+	}
 
   function increaseshow()
   {
@@ -219,6 +244,7 @@ const projectSize=
   function changetext()
   {
     document.getElementById('show').value=show;
+
   }
   </script>
 
