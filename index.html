@@ -1,0 +1,202 @@
+<!-- first part of code -->
+
+  <html>
+    <style>
+    body{margin:0;}
+    article {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-columns: 96px auto 96px;
+    }
+    section {
+   
+      border: 0px solid green;
+    }
+    img{
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100vh;
+    }
+
+    .myButton {
+      margin-top: 45vh;
+     margin-left: 21px;
+    background-color:#ffffff;
+    border-radius:28px;
+    border:1px solid #000000;
+    display:inline-block;
+    cursor:pointer;
+    color:#000000;
+    font-family:Arial;
+    font-size:17px;
+    padding:16px 20px;
+    text-decoration:none;
+    outline:none;
+    }
+
+    
+    .idk{
+      position:absolute;                  
+      bottom:0;
+      right:0;                          
+
+    text-align:center; 
+    font-size:10px;
+    background-color: #eeeeee;
+    border: none;
+
+    }
+
+    </style>
+    <body>
+    <article>
+      <section><input id="<btn" type="button" value="<" class="myButton"/></section>
+      <section><img id="img"></section>
+      <section><input id=">btn" type="button" value=">" class="myButton"/>  <input id="show" type="button" class="idk"/>
+      </section>
+    </article>
+    </body>
+  <script>
+
+const projects=[
+"tel-aviv-penthouse",
+"emek-hefer-house"
+]
+const projectSize=
+{
+  "tel-aviv-penthouse": 28,
+  "emek-hefer-house": 23
+}
+// second part of code
+
+  const exist={
+  }
+  for (var index = 0; index < projects.length; index++) { 
+    var proj=projects[index];
+      for(var j=1; j<= projectSize[proj]; j++)
+      {
+        exist[proj+j]="0";
+      }
+  } 
+  console.log(exist);
+
+
+  const up={
+  };
+  const down={
+  };
+
+  for (var index = 0; index < projects.length; index++) { 
+    var proj=projects[index];
+      for(var j=1; j< projectSize[proj]; j++)
+      {
+        x=j+1;
+        up[proj+j]=proj+x;
+        down[proj+x]=proj+j;
+      }
+  } 
+  for(var index=0; index< projects.length; index++)
+  {
+    proj=projects[index];
+    if(index+1<projects.length){
+    up[proj+projectSize[proj]]=projects[index+1]+"1";
+    down[projects[index+1]+"1"]=proj+projectSize[proj];
+    }
+    else
+    {
+      up[proj+projectSize[proj]]="tel-aviv-penthouse1";
+      down["tel-aviv-penthouse1"]=proj+projectSize[proj];
+    }
+  }
+  console.log(up);
+  console.log(down);
+
+
+  //starting code
+    var urlParams;
+    (window.onpopstate = function () {
+      var match,
+          pl     = /\+/g,  // Regex for replacing addition symbol with a space
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+          query  = window.location.search.substring(1);
+
+      urlParams = {};
+      while (match = search.exec(query))
+         urlParams[decode(match[1])] = decode(match[2]);
+    })();
+
+    var show=urlParams["key"]
+    if(show in exist)
+    {
+      console.log("got here from "+show);
+      changetext();
+    }
+    else
+    {
+      console.log("showing first image");
+      show="tel-aviv-penthouse1"
+      changetext();
+
+    }
+
+    var link="imgs/"+show+".jpg"
+    document.getElementById('img').src=link;
+
+
+  document.getElementById(">btn").onclick = function (){
+    increaseshow()
+    changeImage(show)
+    changetext();
+
+  };
+
+  document.getElementById("<btn").onclick = function (){
+    decreaseshow()
+    changeImage(show)
+    changetext();
+
+  };
+
+  function increaseshow()
+  {
+    show=up[show]
+  }
+
+  function decreaseshow()
+  {
+    show=down[show]
+  }
+
+  function changeImage(newsrc)
+  {
+    document.getElementById('img').src="imgs/"+newsrc+".jpg";
+  }
+
+
+  window.addEventListener('keydown', (event) => {
+    if(event.key==="ArrowLeft")
+    {
+      decreaseshow();
+      changeImage(show);
+      changetext();
+
+    }
+    if(event.key==="ArrowRight")
+    {
+      increaseshow();
+      changeImage(show);  
+      changetext();
+  }
+  });
+
+  function changetext()
+  {
+    document.getElementById('show').value=show;
+  }
+  </script>
+
+
+
+  </html>
