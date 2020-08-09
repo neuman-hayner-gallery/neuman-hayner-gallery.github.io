@@ -106,7 +106,7 @@ var ptmp=Number(urlParams["p"]);
 var ntmp=Number(urlParams["n"]);
 console.log("p"+ptmp);
 console.log("n"+ntmp);
-if(ptmp>=1 && ptmp<=projects["total"] && ntmp >=1 && ntmp<= projects["n"+ptmp]){p=ptmp; n=ntmp;}
+if(ptmp>=1 && ptmp<=projects["total"] && ntmp >=1 && ntmp<= projects["n"+ptmp]){p=ptmp; n=ntmp; console.log("got fitting project and image - taking you there");}
 else{p=1; n=1;}
 showimg()
 showtext()
