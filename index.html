@@ -188,6 +188,13 @@ document.getElementById(">>btn").onclick = function (){
     changetext();
 
   };
+	  
+document.getElementById(">>btn").onclick = function (){
+    downjump()
+    changeImage(show)
+    changetext();
+
+  };
 
 
   document.getElementById(">btn").onclick = function (){
@@ -210,6 +217,14 @@ document.getElementById(">>btn").onclick = function (){
 		temp=show;
 		prj=temp.replace(/0|1|2|3|4|5|6|7|8|9/g, "");
 	}
+	 
+	function downjump()
+	  {
+		  show=down[prj+"1"]
+		  temp=show;
+		  prj=temp.replace(/0|1|2|3|4|5|6|7|8|9/g, "");
+		  show=prj+"1"
+	  }
 
   function increaseshow()
   {
